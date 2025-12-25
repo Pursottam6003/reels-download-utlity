@@ -11,10 +11,17 @@ import os
 
 app = FastAPI(title="reels-downloader-backend")
 
-# Allow local dev/frontends to call this API. In production restrict origins.
+# Allow local dev/frontends to call this API.
+# In production, restrict origins via FRONTEND_ORIGIN env (comma-separated).
+origins_env = os.getenv("FRONTEND_ORIGIN")
+if origins_env:
+    allowed_origins = [o.strip() for o in origins_env.split(",") if o.strip()]
+else:
+    allowed_origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
