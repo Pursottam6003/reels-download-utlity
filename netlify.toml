@@ -1,7 +1,7 @@
 [build]
   base = "frontend"
   command = "npm run build"
-  publish = "frontend/dist"
+  publish = "dist"
 
 # Proxy frontend /api/* requests to your deployed backend
 # Replace the URL below after backend is deployed (Vercel/Render/etc.)
