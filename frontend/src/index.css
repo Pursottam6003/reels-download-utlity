@@ -1,0 +1,49 @@
+:root{
+  --bg-start: #e6f0ff;
+  --bg-end: #f7fbff;
+  --card-bg: #ffffff;
+  --muted: #6b7280;
+  --accent: #0ea5e9;
+  --accent-dark: #0284c7;
+}
+*{box-sizing:border-box}
+body{font-family: Inter, system-ui, Arial, sans-serif; background:linear-gradient(180deg,var(--bg-start),var(--bg-end)); margin:0; color:#111}
+.topbar{background:transparent;padding:18px 0}
+.topbar-inner{max-width:980px;margin:0 auto;padding:0 16px;display:flex;align-items:center}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-text{font-weight:700;font-size:18px}
+
+.center-card{display:flex;justify-content:center;padding:24px}
+.card{width:100%;max-width:980px;background:var(--card-bg);border-radius:12px;box-shadow:0 8px 30px rgba(13,38,59,0.08);padding:28px}
+.title{margin:0;font-size:22px}
+.subtitle{margin:8px 0 20px;color:var(--muted)}
+
+.search-compact{display:flex;gap:12px}
+.search-compact input{flex:1;padding:12px 14px;border-radius:10px;border:1px solid #e6edf3;background:transparent}
+.btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.btn.primary{background:var(--accent);color:white}
+.btn.primary.large{padding:12px 18px;font-weight:600}
+.btn.outline{background:transparent;border:1px solid #e6edf3;color:var(--accent-dark)}
+.btn.disabled{background:#eaeaea;color:#999}
+
+.meta{display:flex;gap:20px;margin-top:20px}
+.meta-left{flex:0 0 320px}
+.thumb-large{width:100%;border-radius:8px;object-fit:cover}
+.meta-right{flex:1}
+.video-title{margin:0 0 6px}
+.muted{color:var(--muted);margin:0 0 12px}
+.panel{background:#fbfdff;border:1px solid #eef6ff;padding:10px;border-radius:8px;margin:12px 0}
+.panel-row{font-size:14px;color:#111;margin:6px 0}
+
+.formats{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.format{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:8px;background:#fff;border:1px solid #f1f5f9}
+.format-info{display:flex;flex-direction:column}
+.fmt-id{font-weight:600}
+.fmt-desc{color:var(--muted);font-size:13px}
+.actions{display:flex;gap:8px}
+.error{color:#b91c1c;margin-top:12px}
+
+@media (max-width:760px){
+  .meta{flex-direction:column}
+  .meta-left{flex:unset}
+}
