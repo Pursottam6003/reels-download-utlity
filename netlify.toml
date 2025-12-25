@@ -1,0 +1,12 @@
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "frontend/dist"
+
+# Proxy frontend /api/* requests to your deployed backend
+# Replace the URL below after backend is deployed (Vercel/Render/etc.)
+[[redirects]]
+  from = "/api/*"
+  to = "https://YOUR-BACKEND-URL.example.com/api/:splat"
+  status = 200
+  force = true

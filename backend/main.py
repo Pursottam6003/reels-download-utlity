@@ -7,6 +7,7 @@ import httpx
 import redis.asyncio as redis
 from starlette.responses import StreamingResponse
 import asyncio
+import os
 
 app = FastAPI(title="reels-downloader-backend")
 
@@ -124,8 +125,13 @@ async def rate_limit_dep(request: Request):
 
 @app.on_event("startup")
 async def startup_event():
-    # create redis client (default localhost, change via env var in prod)
-    app.state.redis = redis.Redis()
+    # create redis client; configurable via REDIS_URL in production
+    # e.g. REDIS_URL=redis://:password@host:port
+    redis_url = os.getenv("REDIS_URL")
+    if redis_url:
+        app.state.redis = redis.from_url(redis_url)
+    else:
+        app.state.redis = redis.Redis()
 
 
 @app.on_event("shutdown")
