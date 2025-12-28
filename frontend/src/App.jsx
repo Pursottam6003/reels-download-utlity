@@ -2,6 +2,13 @@ import React, { useState } from 'react'
 import NavBar from './components/NavBar'
 import SearchBar from './components/SearchBar'
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '') || ''
+
+function api(path) {
+  if (!API_BASE) return path
+  return `${API_BASE}${path}`
+}
+
 function humanSize(bytes) {
   if (!bytes && bytes !== 0) return 'unknown'
   const units = ['B', 'KB', 'MB', 'GB']
@@ -63,7 +70,7 @@ export default function App() {
     setError(null)
     setResult(null)
     try {
-      const resp = await fetch('http://127.0.0.1:8000/download', {
+      const resp = await fetch(api('/download'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url }),
@@ -97,7 +104,7 @@ export default function App() {
               <div className="meta-left">
                 {/* Use backend proxy for thumbnails to avoid hotlinking / CORS issues */}
                 <img
-                  src={result.thumbnail ? `http://127.0.0.1:8000/stream?url=${encodeURIComponent(result.thumbnail)}` : undefined}
+                  src={result.thumbnail ? `${api('/stream')}?url=${encodeURIComponent(result.thumbnail)}` : undefined}
                   alt="thumb"
                   className="thumb-large"
                   onError={(e) => {
@@ -128,7 +135,7 @@ export default function App() {
                       <div className="actions">
                         {f.url ? (
                           <a
-                            href={`http://127.0.0.1:8000/stream?download=1&filename=${encodeURIComponent((result.title || 'video') + '.' + (f.ext||'mp4'))}&url=${encodeURIComponent(f.url)}`}
+                            href={`${api('/stream')}?download=1&filename=${encodeURIComponent((result.title || 'video') + '.' + (f.ext||'mp4'))}&url=${encodeURIComponent(f.url)}`}
                             className="btn primary"
                           >
                             Download
@@ -137,7 +144,7 @@ export default function App() {
                           <button disabled className="btn disabled">No URL</button>
                         )}
                         {f.url && (
-                          <a className="btn outline" href={`http://127.0.0.1:8000/stream?url=${encodeURIComponent(f.url)}`} target="_blank" rel="noreferrer">Stream</a>
+                          <a className="btn outline" href={`${api('/stream')}?url=${encodeURIComponent(f.url)}`} target="_blank" rel="noreferrer">Stream</a>
                         )}
                       </div>
                     </div>
