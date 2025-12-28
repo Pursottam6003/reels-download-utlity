@@ -7,6 +7,19 @@
 # Replace the URL below after backend is deployed (Vercel/Render/etc.)
 [[redirects]]
   from = "/api/*"
-  to = "https://YOUR-BACKEND-URL.example.com/api/:splat"
+  to = "https://reels-download-utlity.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+# Directly proxy backend endpoints used by the frontend
+[[redirects]]
+  from = "/download"
+  to = "https://reels-download-utlity.onrender.com/download"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/stream"
+  to = "https://reels-download-utlity.onrender.com/stream"
   status = 200
   force = true
